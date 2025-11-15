@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Game } from 'src/models/game';
 
@@ -9,11 +9,16 @@ import { Game } from 'src/models/game';
   templateUrl: './game.component.html',
   styleUrls: ['./game.component.scss'],
 })
-export class GameComponent {
+export class GameComponent implements OnInit {
   pickCardAnimation: boolean = false;
   game!: Game;
 
   constructor() {}
+
+  ngOnInit(): void {
+    this.newGame();
+    console.log(this.game);
+  }
 
   newGame() {
     this.game = new Game();
