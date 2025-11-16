@@ -14,7 +14,6 @@ export class StartScreenComponent {
   constructor(private router: Router) {}
 
   newGame() {
-    console.log(this.test);
     this.router.navigate(['/game']);
   }
 }
