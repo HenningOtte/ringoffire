@@ -10,10 +10,14 @@
     margin-left: 16px;
   }
   > img {
-    width: 100px;
-    aspect-ratio: 1/1;
+    width: 70px;
+    height: 70px;
     object-fit: cover;
     border-radius: 100%;
   }
-  background-color: beige;
+  background-color: rgb(95, 95, 95, 0.8);
+}
+
+.player-active {
+  background-color: rgb(255, 165, 0) !important;
 }
