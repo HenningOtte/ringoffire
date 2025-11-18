@@ -6,6 +6,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogAddPlayerComponent } from 'src/app/dialog-add-player/dialog-add-player.component';
+import { GameInfoComponent } from '../game-info/game-info.component';
 
 @Component({
   selector: 'app-game',
@@ -16,6 +17,7 @@ import { DialogAddPlayerComponent } from 'src/app/dialog-add-player/dialog-add-p
     MatButtonModule,
     MatIconModule,
     DialogAddPlayerComponent,
+    GameInfoComponent,
   ],
   templateUrl: './game.component.html',
   styleUrls: ['./game.component.scss'],
@@ -39,8 +41,6 @@ export class GameComponent implements OnInit {
     if (!this.pickCardAnimation) {
       this.currentCard = this.game.stack.pop()!;
       this.pickCardAnimation = true;
-      console.log(`New Card: ${this.currentCard}`);
-      console.log('Game is:', this.game);
 
       setTimeout(() => {
         this.game.playedCards.push(this.currentCard);
