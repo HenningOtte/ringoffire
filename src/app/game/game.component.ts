@@ -8,6 +8,16 @@ import { MatDialog } from '@angular/material/dialog';
 import { DialogAddPlayerComponent } from 'src/app/dialog-add-player/dialog-add-player.component';
 import { GameInfoComponent } from '../game-info/game-info.component';
 
+import { AsyncPipe } from '@angular/common';
+import { inject } from '@angular/core';
+import {
+  Firestore,
+  collectionData,
+  collection,
+  doc,
+  getDoc,
+} from '@angular/fire/firestore';
+
 @Component({
   selector: 'app-game',
   standalone: true,
@@ -26,12 +36,26 @@ export class GameComponent implements OnInit {
   pickCardAnimation: boolean = false;
   currentCard: string = '';
   game!: Game;
+  firestore = inject(Firestore);
+  docRef;
 
-  constructor(private dialog: MatDialog) {}
+  constructor(private dialog: MatDialog) {
+    this.docRef = doc(this.firestore, 'Cards', '5AQrj49bG1N6HHNoyoy8');
+    this.logListData();
+  }
 
   ngOnInit(): void {
     this.newGame();
-    console.log(this.game);
+    // console.log(this.game);
+  }
+
+  async logListData() {
+    const snap = await getDoc(this.docRef);
+    console.log('Card: ', snap.data());
+  }
+
+  listCollection() {
+    return collection(this.firestore, 'Cards');
   }
 
   newGame() {
