@@ -11,4 +11,5 @@ import { CommonModule } from '@angular/common';
 export class PlayerComponent {
   @Input() name: string = 'Player';
   @Input() playerActive: boolean = false;
+  @Input() image: string = '1.png';
 }

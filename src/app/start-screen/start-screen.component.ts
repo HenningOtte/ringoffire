@@ -26,7 +26,6 @@ export class StartScreenComponent {
     const id = await this.gameService
       .addGame(game.toJson())
       .then((gameInfo) => {
-        console.log(gameInfo.id);
         this.router.navigateByUrl(`/game/${gameInfo.id}`);
       });
   }

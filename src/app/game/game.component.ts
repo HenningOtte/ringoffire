@@ -6,6 +6,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogAddPlayerComponent } from 'src/app/dialog-add-player/dialog-add-player.component';
+import { PlayerEditComponent } from 'src/app/player-edit/player-edit.component';
 import { GameInfoComponent } from '../game-info/game-info.component';
 
 import { AsyncPipe } from '@angular/common';
@@ -33,6 +34,7 @@ import { GameService } from 'src/app/firebase-services/game-service.service';
     MatIconModule,
     DialogAddPlayerComponent,
     GameInfoComponent,
+    PlayerEditComponent,
   ],
   templateUrl: './game.component.html',
   styleUrls: ['./game.component.scss'],
@@ -46,8 +48,9 @@ export class GameComponent implements OnInit {
   private firestore = inject(Firestore);
   private route = inject(ActivatedRoute);
   private gameService = inject(GameService);
+  private dialog = inject(MatDialog);
 
-  constructor(private dialog: MatDialog) {
+  constructor() {
     this.unsubParams = this.getGameId();
   }
 
@@ -55,6 +58,7 @@ export class GameComponent implements OnInit {
     this.game.currentPlayer = game.currentPlayer;
     this.game.playedCards = game.playedCards;
     this.game.players = game.players;
+    this.game.playerImages = game.playerImages;
     this.game.stack = game.stack;
     this.game.pickCardAnimation = game.pickCardAnimation;
     this.game.currentCard = game.currentCard;
@@ -69,8 +73,6 @@ export class GameComponent implements OnInit {
       }
     );
   }
-
-  loadGame() {}
 
   getGameId() {
     return this.route.params.subscribe((params) => {
@@ -89,7 +91,7 @@ export class GameComponent implements OnInit {
     });
   }
 
-  takekCard() {
+  takeCard() {
     if (!this.game.pickCardAnimation) {
       this.game.currentCard = this.game.stack.pop()!;
       this.game.pickCardAnimation = true;
@@ -118,6 +120,15 @@ export class GameComponent implements OnInit {
     dialogRef.afterClosed().subscribe((name: string) => {
       if (!name || name.length == 0) return;
       this.game.players.push(name);
+      this.game.playerImages.push('1.png');
+      this.gameService.saveGame(this.gameId, this.game.toJson());
+    });
+  }
+
+  editPlayer(playerID: number) {
+    const dialogRef = this.dialog.open(PlayerEditComponent);
+    dialogRef.afterClosed().subscribe((change: string) => {
+      this.game.playerImages[playerID] = change;
       this.gameService.saveGame(this.gameId, this.game.toJson());
     });
   }

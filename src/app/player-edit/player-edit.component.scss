@@ -1,0 +1,17 @@
+.container {
+    margin: 16px;
+    display: flex;
+    gap: 16px;
+}
+
+.profile-picture {
+    width: 60px;
+    height: 60px;
+    border-radius: 100%;
+    background-color: orange;
+    cursor: pointer;
+
+    &:hover {
+        filter:brightness(1.15)
+    }
+}

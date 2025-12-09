@@ -5,6 +5,11 @@
   border-top-left-radius: 50px;
   border-bottom-left-radius: 50px;
 
+  &:hover {
+    cursor: pointer;
+    filter: brightness(1.15);
+  }
+
   > span {
     font-size: 32px;
     margin-left: 16px;
@@ -14,6 +19,8 @@
     height: 70px;
     object-fit: cover;
     border-radius: 100%;
+    background-color: rgb(255, 255, 255);
+    outline: 3px solid rgb(0, 0, 0);
   }
   background-color: rgb(95, 95, 95, 0.8);
 }
