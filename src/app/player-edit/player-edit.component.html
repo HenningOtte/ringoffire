@@ -1,4 +1,7 @@
 <div class="container">
-    <img class="profile-picture" [mat-dialog-close]="picture" *ngFor="let picture of allProfilePictures" src="./assets/img/profile/{{picture}}"
+    <h1>Change Profil-Picture</h1>
+    <div>
+        <img class="profile-picture" [mat-dialog-close]="picture" *ngFor="let picture of allProfilePictures" src="./assets/img/profile/{{picture}}"
         alt="" />
+    </div>
 </div>

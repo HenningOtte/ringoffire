@@ -128,8 +128,10 @@ export class GameComponent implements OnInit {
   editPlayer(playerID: number) {
     const dialogRef = this.dialog.open(PlayerEditComponent);
     dialogRef.afterClosed().subscribe((change: string) => {
-      this.game.playerImages[playerID] = change;
-      this.gameService.saveGame(this.gameId, this.game.toJson());
+      if (change) {
+        this.game.playerImages[playerID] = change;
+        this.gameService.saveGame(this.gameId, this.game.toJson());
+      }
     });
   }
 }
