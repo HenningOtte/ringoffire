@@ -85,6 +85,8 @@
   position: absolute;
   right: 32px;
   bottom: 32px;
+  background-color: orange;
+  box-shadow: none;
 
   @media (max-width: 600px) {
     right: 16px;
@@ -101,7 +103,8 @@
     left: 32px;
   }
   @media (max-width: 600px) {
-    left: 16px;
-    right: 84px;
+    left: 0px;
+    right: 0px;
+    bottom: 0px;
   }
 }

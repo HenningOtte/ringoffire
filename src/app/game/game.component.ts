@@ -8,6 +8,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { DialogAddPlayerComponent } from 'src/app/dialog-add-player/dialog-add-player.component';
 import { PlayerEditComponent } from 'src/app/player-edit/player-edit.component';
 import { GameInfoComponent } from '../game-info/game-info.component';
+import { AppPlayerMobileComponent } from "src/app/app-player-mobile/app-player-mobile.component";
 
 import { AsyncPipe } from '@angular/common';
 import { inject } from '@angular/core';
@@ -35,6 +36,7 @@ import { GameService } from 'src/app/firebase-services/game-service.service';
     DialogAddPlayerComponent,
     GameInfoComponent,
     PlayerEditComponent,
+    AppPlayerMobileComponent,
   ],
   templateUrl: './game.component.html',
   styleUrls: ['./game.component.scss'],
@@ -133,5 +135,10 @@ export class GameComponent implements OnInit {
         this.gameService.saveGame(this.gameId, this.game.toJson());
       }
     });
+  }
+
+  getRandomRotation() {
+    // return Math.random() * (10 - 10) + -10;
+    return -10;
   }
 }
