@@ -49,6 +49,6 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
 @media (max-width: 600px) {
   .hide-mobile {
-    display: none;
+    display: none !important;
   }  
 }

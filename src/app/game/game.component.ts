@@ -8,7 +8,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { DialogAddPlayerComponent } from 'src/app/dialog-add-player/dialog-add-player.component';
 import { PlayerEditComponent } from 'src/app/player-edit/player-edit.component';
 import { GameInfoComponent } from '../game-info/game-info.component';
-import { AppPlayerMobileComponent } from "src/app/app-player-mobile/app-player-mobile.component";
+import { AppPlayerMobileComponent } from 'src/app/app-player-mobile/app-player-mobile.component';
 
 import { AsyncPipe } from '@angular/common';
 import { inject } from '@angular/core';
@@ -68,12 +68,26 @@ export class GameComponent implements OnInit {
 
   ngOnInit(): void {
     this.newGame();
+    this.scrollToActivPlayer();
     this.unsubGame = onSnapshot(
       this.gameService.getDocRef('games', this.gameId),
       (game) => {
         this.updateGame(game.data());
       }
     );
+  }
+
+  scrollToActivPlayer() {
+    setTimeout(() => {
+      const player = document.getElementsByClassName('player-active');
+      const div = document.getElementsByClassName('scroll-container');
+      
+      if (!player) return;
+      div[0].scrollTo(player[1].getBoundingClientRect().left - 16, 0);
+
+      console.log('scrollbar-length: ', div[0].getBoundingClientRect().right, ': last player: ', player[1].getBoundingClientRect().left);
+      
+    }, 400);
   }
 
   getGameId() {
@@ -103,6 +117,7 @@ export class GameComponent implements OnInit {
         this.game.playedCards.push(this.game.currentCard);
         this.game.pickCardAnimation = false;
         this.nextPlayer();
+        this.scrollToActivPlayer();
         this.gameService.saveGame(this.gameId, this.game.toJson());
       }, 1000);
     }
