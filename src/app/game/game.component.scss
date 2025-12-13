@@ -24,7 +24,7 @@
 
 .top-card {
   border-radius: 8px;
-  cursor: pointer;  
+  cursor: pointer;
   filter: drop-shadow(0px 0px 5px rgb(0, 0, 0, 0.1));
 }
 
@@ -91,7 +91,7 @@
   position: absolute;
   right: 32px;
   bottom: 32px;
-  background-color: #F78C31;
+  background-color: #f78c31;
   box-shadow: none;
 
   @media (max-width: 600px) {
@@ -122,7 +122,7 @@
   right: 0px;
   top: 0px;
   overflow-y: hidden;
-  overflow-x: scroll;
+  overflow-x: auto;
   scroll-behavior: smooth;
   display: flex;
   gap: 8px;

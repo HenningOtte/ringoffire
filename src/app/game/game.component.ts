@@ -79,17 +79,27 @@ export class GameComponent implements OnInit {
 
   scrollToActivPlayer() {
     setTimeout(() => {
-      const player = document.getElementsByClassName('player-active');
-      const div = document.getElementsByClassName('scroll-container');
-      
-      if (!player) return;
-      div[0].scrollTo(player[1].getBoundingClientRect().left - 16, 0);
+      const container = document.querySelector(
+        '.scroll-container'
+      ) as HTMLElement;
+      const player = container?.querySelector('.player-active') as HTMLElement;
 
-      console.log('scrollbar-length: ', div[0].getBoundingClientRect().right, ': last player: ', player[1].getBoundingClientRect().left);
-      
+      if (!container || !player) return;
+
+      const x = this.getXScrollPosition(player, container);
+
+      container.scrollTo({ left: x, top: 0, behavior: 'smooth' });
     }, 400);
   }
 
+  getXScrollPosition(player: any, container: any) {
+    return (
+      player.getBoundingClientRect().left -
+      container.getBoundingClientRect().left +
+      container.scrollLeft -
+      16
+    );
+  }
   getGameId() {
     return this.route.params.subscribe((params) => {
       this.gameId = params['id'];
