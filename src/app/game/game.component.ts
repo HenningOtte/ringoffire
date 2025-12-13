@@ -46,6 +46,7 @@ export class GameComponent implements OnInit {
   gameId: string = '';
   unsubParams;
   unsubGame: any;
+  gameOver: boolean = false;
 
   private firestore = inject(Firestore);
   private route = inject(ActivatedRoute);
@@ -87,7 +88,6 @@ export class GameComponent implements OnInit {
       if (!container || !player) return;
 
       const x = this.getXScrollPosition(player, container);
-
       container.scrollTo({ left: x, top: 0, behavior: 'smooth' });
     }, 400);
   }
@@ -118,10 +118,13 @@ export class GameComponent implements OnInit {
   }
 
   takeCard() {
-    if (!this.game.pickCardAnimation) {
+    if (this.game.stack.length == 0) {
+      this.gameOver = true;
+    } else if (!this.game.pickCardAnimation) {
       this.game.currentCard = this.game.stack.pop()!;
       this.game.pickCardAnimation = true;
       this.gameService.saveGame(this.gameId, this.game.toJson());
+      this.preloadNextCard();
 
       setTimeout(() => {
         this.game.playedCards.push(this.game.currentCard);
@@ -131,6 +134,10 @@ export class GameComponent implements OnInit {
         this.gameService.saveGame(this.gameId, this.game.toJson());
       }, 1000);
     }
+  }
+
+  preloadNextCard() {
+    new Image();
   }
 
   nextPlayer() {
@@ -155,15 +162,24 @@ export class GameComponent implements OnInit {
   editPlayer(playerID: number) {
     const dialogRef = this.dialog.open(PlayerEditComponent);
     dialogRef.afterClosed().subscribe((change: string) => {
-      if (change) {
+      if (!change) return;
+      if (change == 'DELETE') {
+        this.game.players.splice(playerID, 1);
+      } else {
         this.game.playerImages[playerID] = change;
-        this.gameService.saveGame(this.gameId, this.game.toJson());
       }
+      this.gameService.saveGame(this.gameId, this.game.toJson());
     });
   }
 
-  getRandomRotation() {
-    // return Math.random() * (10 - 10) + -10;
-    return -10;
+  restart() {
+    let newGame = new Game();
+    newGame.currentPlayer = 0;
+    newGame.playerImages = this.game.playerImages;
+    newGame.players = this.game.players;
+    this.game = newGame;
+    this.gameOver = false;
+    this.scrollToActivPlayer();
+    this.gameService.saveGame(this.gameId, this.game.toJson());
   }
 }

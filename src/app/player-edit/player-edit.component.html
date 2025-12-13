@@ -1,7 +1,11 @@
 <div class="container">
-    <h1>Change Profil-Picture</h1>
+    <h1>Edit Player</h1>
     <div>
-        <img class="profile-picture" [mat-dialog-close]="picture" *ngFor="let picture of allProfilePictures" src="./assets/img/profile/{{picture}}"
-        alt="" />
+        <img class="profile-picture" [mat-dialog-close]="picture" *ngFor="let picture of allProfilePictures"
+            src="./assets/img/profile/{{picture}}" alt="" />
     </div>
+    <mat-dialog-actions>
+        <button mat-button (click)="this.close()">Close</button>
+        <button mat-button color="warn" cdkFocusInitial [mat-dialog-close]="'DELETE'">Delete</button>
+    </mat-dialog-actions>
 </div>

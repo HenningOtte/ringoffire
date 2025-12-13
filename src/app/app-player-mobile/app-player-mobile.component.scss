@@ -1,6 +1,6 @@
 .player {
   padding: 8px;
-  width: 60px;
+  width: 68px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -14,9 +14,12 @@
   }
 
   > span {
+    max-width: 76px;
     font-size: 16px;
     text-align: center;
     display: none;
+    text-overflow: ellipsis;
+    overflow: hidden;
   }
   > img {
     width: 36px;
@@ -30,9 +33,9 @@
 }
 
 .player-active {
-  background-color: #F78C31 !important;
-  width: 80px;
-  z-index: 10 !important; 
+  background-color: #f78c31 !important;
+  width: 88px;
+  z-index: 10 !important;
   > span {
     display: inline;
   }

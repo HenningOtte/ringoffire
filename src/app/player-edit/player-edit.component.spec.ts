@@ -8,7 +8,7 @@ describe('PlayerEditComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [PlayerEditComponent]
+      imports: [PlayerEditComponent],
     });
     fixture = TestBed.createComponent(PlayerEditComponent);
     component = fixture.componentInstance;
