@@ -1,11 +1,24 @@
 <div class="container">
-    <h1>Edit Player</h1>
-    <div>
-        <img class="profile-picture" [mat-dialog-close]="picture" *ngFor="let picture of allProfilePictures"
+    <div class="dialog-header">
+        <h1>Edit Player</h1>
+        <button mat-icon-button (click)="this.close()"><mat-icon>close</mat-icon></button>
+    </div>
+    <div class="name-edit-row">
+        <mat-form-field appearance="outline">
+            <mat-label>{{newName}}</mat-label>
+            <input matInput [(ngModel)]="newName" [disabled]="edit == false" />
+        </mat-form-field>
+        <button mat-icon-button (click)="editName()">
+            <mat-icon *ngIf="!edit">edit</mat-icon>
+            <mat-icon *ngIf="edit">check</mat-icon>
+        </button>
+    </div>
+    <div class="pictures-box">
+        <img class="profile-picture" *ngFor="let picture of allProfilePictures" (click)="savePicture(picture)"
             src="./assets/img/profile/{{picture}}" alt="" />
     </div>
     <mat-dialog-actions>
-        <button mat-button (click)="this.close()">Close</button>
         <button mat-button color="warn" cdkFocusInitial [mat-dialog-close]="'DELETE'">Delete</button>
+        <button mat-button [mat-dialog-close]="save()">Save</button>
     </mat-dialog-actions>
 </div>

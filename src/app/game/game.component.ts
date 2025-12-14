@@ -166,13 +166,19 @@ export class GameComponent implements OnInit {
   }
 
   editPlayer(playerID: number) {
-    const dialogRef = this.dialog.open(PlayerEditComponent);
-    dialogRef.afterClosed().subscribe((change: string) => {
+    const dialogRef = this.dialog.open(PlayerEditComponent, {
+      data: {
+        playerName: this.game.players[playerID],
+        picture: this.game.playerImages[playerID],
+      },
+    });
+    dialogRef.afterClosed().subscribe((change: any) => {
       if (!change) return;
       if (change == 'DELETE') {
         this.game.players.splice(playerID, 1);
       } else {
-        this.game.playerImages[playerID] = change;
+        this.game.playerImages[playerID] = change.picture;
+        this.game.players[playerID] = change.name;
       }
       this.gameService.saveGame(this.gameId, this.game.toJson());
     });
