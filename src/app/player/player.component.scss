@@ -5,6 +5,8 @@
   border-top-left-radius: 50px;
   border-bottom-left-radius: 50px;
   padding-right: 8px;
+  background-color: rgba(100, 100, 100, 0.4);
+  backdrop-filter: blur(5px);
 
   &:hover {
     cursor: pointer;
@@ -25,7 +27,6 @@
     background-color: rgb(255, 255, 255);
     outline: 3px solid rgb(0, 0, 0);
   }
-  background-color: rgb(95, 95, 95, 0.8);
 
   @media (max-width: 992px) {
     max-width: 200px;
