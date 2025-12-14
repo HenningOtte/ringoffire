@@ -1,13 +1,15 @@
 <h2 mat-dialog-title>Add new player</h2>
 
 <mat-dialog-content>
-    <p>Please enter the name of a player.</p>
-    <mat-form-field>
+    <p *ngIf="count < max">Please enter the name of a player.</p>
+    <p style="color: red;" *ngIf="count >= max">Max players reached</p>
+    <mat-form-field appearance="outline">
         <mat-label>Name</mat-label>
-        <input matInput [(ngModel)]="name" />
+        <input matInput [(ngModel)]="name" [disabled]="count >= max" />
     </mat-form-field>
 </mat-dialog-content>
 <mat-dialog-actions>
     <button mat-button (click)="onNoClick()">No Thanks</button>
-    <button mat-button [disabled]="name.length == 0" [mat-dialog-close]="name" cdkFocusInitial>Ok</button>
+    <button mat-button [disabled]="name.length == 0 || count >= max" [mat-dialog-close]="name"
+        cdkFocusInitial>Ok</button>
 </mat-dialog-actions>

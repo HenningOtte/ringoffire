@@ -127,7 +127,7 @@
   display: flex;
   gap: 8px;
 
-  @media (min-width: 600px) {
+  @media (min-width: 769px) {
     display: none;
   }
 
@@ -186,7 +186,6 @@
 .preloadIMG {
   width: 0px;
   height: 0px;
-  opacity: 0;
-  z-index: -999;
-  position: absolute;
+  opacity: 0 !important;
+  z-index: -999 !important;
 }

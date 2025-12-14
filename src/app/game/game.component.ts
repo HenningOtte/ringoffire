@@ -47,6 +47,7 @@ export class GameComponent implements OnInit {
   unsubParams;
   unsubGame: any;
   gameOver: boolean = false;
+  maxPlayers: number = 10;
 
   private firestore = inject(Firestore);
   private route = inject(ActivatedRoute);
@@ -149,7 +150,12 @@ export class GameComponent implements OnInit {
   }
 
   openDialog(): void {
-    const dialogRef = this.dialog.open(DialogAddPlayerComponent);
+    const dialogRef = this.dialog.open(DialogAddPlayerComponent, {
+      data: {
+        count: this.game.players.length,
+        maxPlayers: this.maxPlayers,
+      },
+    });
 
     dialogRef.afterClosed().subscribe((name: string) => {
       if (!name || name.length == 0) return;

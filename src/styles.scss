@@ -52,13 +52,13 @@ body {
   font-family: Roboto, "Helvetica Neue", sans-serif;
 }
 
-@media (min-width: 600px) {
+@media (min-width: 769px) {
   .hide-desktop {
     display: none;
   }
 }
 
-@media (max-width: 600px) {
+@media (max-width: 768px) {
   .hide-mobile {
     display: none !important;
   }
